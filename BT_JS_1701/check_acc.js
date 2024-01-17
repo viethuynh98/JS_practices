@@ -4,11 +4,11 @@ var accounts = [
     "password": "1234qweradsf!"
   },
   {
-    "email": "3120221121@ued.udn.vn",
+    "email": "3221@ued.udn.vn",
     "password": "zxcvasdfqwer!"
   },
   {
-    "email": "viethuynh98@gmail.com",
+    "email": "viethuy@gmail.com",
     "password": "220321923aye!"
   },
   {
