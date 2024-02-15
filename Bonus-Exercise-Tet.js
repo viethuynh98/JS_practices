@@ -120,3 +120,112 @@ adipiscing elit. Phasellus eu turpis vel augue porta blandit.
 Etiam lectus sem, feugiat sed ultricies eget, dictum ac dui. 
 Pellentesque eget felis magna. Maecenas viverra feugiat lectus id cursus.`
 
+//------------------------------------------------------------
+// 9: Destructuring Assignment
+
+// const action = require('lib/action')
+// const service = require('lib/service')
+
+// const form = this.props.form;
+// const errors = this.props.errors;
+// const entity = this.props.entity;
+// const controller = this.props.controller;
+// const component = this.props.component;
+
+//=> ES module
+import { action, service } from 'lib';
+const {form, errors, entity, controler, component } = this.props;
+
+//------------------------------------------------------------
+// 10: Spread Operator (...)
+
+//joining array
+const odd = [1, 3, 5];
+const nums = [2, 4, 6].concat(odd);
+const nums_02 = [2, 4, 6, ...odd];
+const nums_03 = [2, ...odd, 4, 6];
+
+// cloning arrays
+const arr = [1, 2, 3, 4]
+const arr2 = arr.slice();
+const arr3 = [...arr];
+
+//------------------------------------------------------------
+// 11: Constraint Param
+function sample(param1) {
+  if (param1 = undefined) {
+    throw new Error('Thieu tham so');
+  }
+  return param1;
+}
+
+let mandatory = () => { throw new Error('Thieu tham so'); }
+let sample_01 = (param1 = mandatory()) => param1;
+
+//------------------------------------------------------------
+// 12: Find() in arrays
+const employees = [
+  {name: 'Emp A', age: 25},
+  {name: 'Emp B', age: 28},
+  {name: 'Emp C', age: 35}
+]
+
+function findEmp(name) {
+  for (let i = 0; i < employees.length; i++) {
+    if (employees[i].name === name) {
+      return employees[i];
+    }
+  }
+}
+
+const name = 'Emp A'
+emp = findEmp(name)
+//or
+const nameB = 'Emp B'
+emp = employees.find(item => item.name === name)
+
+//------------------------------------------------------------
+// 13: Object[key]
+function validate(fullName) {
+  if (!fullName.firstName) {
+    return false;
+  }
+  if (!fullName.lastName) {
+    return false;
+  }
+  return true;
+}
+
+console.log(validate({firstName: 'Duy', lastName: 'Buffet'}));
+
+const rule = {
+  firstName: {
+    required: true
+  },
+  lastName: {
+    required: true
+  }
+}
+
+const validate_02 = (rule, values) => {
+  for (prop in rule) {
+    if (rule[prop].required) {
+      if (!values[prop]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+console.log(validate_02(rule, {firstName: 'Duy'}));
+console.log(validate_02(rule, {firstName: 'Duy', lastName: 'Buffet'}));
+
+//------------------------------------------------------------
+// 14: Bitwise NOT double
+if (Math.floor(6.9) === 6) {
+  console.log(true)
+}
+if (~~6.9 === 6) {
+  console.log(true)
+}
