@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Quản Lý Dấu Trang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        li button {
+            background-color: #f44336;
+            color: #fff;
+            padding: 5px 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        li button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trình Quản Lý Dấu Trang</h1>
+    </header>
+    <main>
+        <form id="bookmarkForm">
+            <label for="bookmarkTitle">Tiêu đề:</label>
+            <input type="text" id="bookmarkTitle" required>
+
+            <label for="bookmarkURL">URL:</label>
+            <input type="url" id="bookmarkURL" required>
+
+            <label for="bookmarkCategory">Danh mục:</label>
+            <input type="text" id="bookmarkCategory" required>
+
+            <button type="button" onclick="addBookmark()">Thêm Dấu Trang</button>
+        </form>
+
+        <h2>Dấu Trang Đã Lưu</h2>
+        <ul id="bookmarkList"></ul>
+    </main>
+
+    <script>
+        function addBookmark() {
+            const title = document.getElementById("bookmarkTitle").value;
+            const url = document.getElementById("bookmarkURL").value;
+            const category = document.getElementById("bookmarkCategory").value;
+
+            if (title && url && category) {
+                const bookmarkList = document.getElementById("bookmarkList");
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <strong>${title}</strong> - <a href="${url}" target="_blank">${url}</a> 
+                    <span>${category}</span>
+                    <button onclick="removeBookmark(this)">Xóa</button>
+                `;
+                bookmarkList.appendChild(li);
+
+                // Clear form fields
+                document.getElementById("bookmarkForm").reset();
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin.");
+            }
+        }
+
+        function removeBookmark(button) {
+            const listItem = button.parentNode;
+            const bookmarkList = listItem.parentNode;
+            bookmarkList.removeChild(listItem);
+        }
+    </script>
+</body>
+</html>
